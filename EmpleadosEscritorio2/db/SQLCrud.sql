@@ -1,0 +1,110 @@
+USE [master]
+GO
+/****** Object:  Database [empleado_bd]    Script Date: 29/11/2021 11:04:51 p. m. ******/
+CREATE DATABASE [empleado_bd]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'empleado_bd', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\empleado_bd.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'empleado_bd_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\empleado_bd_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [empleado_bd] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [empleado_bd].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [empleado_bd] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [empleado_bd] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [empleado_bd] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [empleado_bd] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [empleado_bd] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [empleado_bd] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [empleado_bd] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [empleado_bd] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [empleado_bd] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [empleado_bd] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [empleado_bd] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [empleado_bd] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [empleado_bd] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [empleado_bd] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [empleado_bd] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [empleado_bd] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [empleado_bd] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [empleado_bd] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [empleado_bd] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [empleado_bd] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [empleado_bd] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [empleado_bd] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [empleado_bd] SET RECOVERY FULL 
+GO
+ALTER DATABASE [empleado_bd] SET  MULTI_USER 
+GO
+ALTER DATABASE [empleado_bd] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [empleado_bd] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [empleado_bd] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [empleado_bd] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [empleado_bd] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [empleado_bd] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'empleado_bd', N'ON'
+GO
+ALTER DATABASE [empleado_bd] SET QUERY_STORE = OFF
+GO
+USE [empleado_bd]
+GO
+/****** Object:  Table [dbo].[tb_empleados]    Script Date: 29/11/2021 11:04:52 p. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[tb_empleados](
+	[documento] [nvarchar](15) NOT NULL,
+	[nombres] [nvarchar](100) NOT NULL,
+	[apellidos] [nvarchar](100) NOT NULL,
+	[edad] [int] NOT NULL,
+	[direccion] [nvarchar](100) NULL,
+	[fecha_nacimiento] [date] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[documento] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+INSERT [dbo].[tb_empleados] ([documento], [nombres], [apellidos], [edad], [direccion], [fecha_nacimiento]) VALUES (N'11111', N'Cristian', N'serna', 25, N'calle 34', CAST(N'1998-12-23' AS Date))
+GO
+INSERT [dbo].[tb_empleados] ([documento], [nombres], [apellidos], [edad], [direccion], [fecha_nacimiento]) VALUES (N'6666666', N'CAMILA', N'PEREZ', 47, N'CALLE 56', CAST(N'2021-11-25' AS Date))
+GO
+USE [master]
+GO
+ALTER DATABASE [empleado_bd] SET  READ_WRITE 
+GO
